@@ -8,7 +8,7 @@ var revealPoint = function(point) {
 }
 
  var animatePoints = function(point) {
-   forEach(point, callback);
+   forEach(point, revealPoint);
 };
 
 window.onload = function() {
