@@ -144,7 +144,7 @@ var clickHandler = function(targetElement) {
        });
 
        songRows[i].addEventListener('click', function(event) {
-          //Event hander call
           clickHandler(event.target);
          });
     }
+  }
