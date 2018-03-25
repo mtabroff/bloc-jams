@@ -122,18 +122,20 @@ var getSongNumberCell = function(number) {
  var togglePlayFromPlayerBar = function() {
    //if song is paused and play button is clicked in the player bar
    var $currentSong = getSongNumberCell(currentlyPlayingSongNumber);
-   if (currentSoundFile.isPaused()) {
+   if (currentSoundFile) {
+          if (currentSoundFile.isPaused()) {
      //change song number cell from play to pause
-       $currentSong.html(pauseButtonTemplate);
+              $currentSong.html(pauseButtonTemplate);
      //change HTML of player bar's play button to pause button
-       $('.main-controls .play-pause').html(playerBarPauseButton);
+              $('.main-controls .play-pause').html(playerBarPauseButton);
      //play the song
-       currentSoundFile.play();
-  } else if (currentSoundFile.play()) {
-      $currentSong.html(playButtonTemplate);
-      $('.main-controls .play-pause').html(playerBarPlayButton);
-      currentSoundFile.pause();
-  }
+              currentSoundFile.play();
+           } else if (currentSoundFile.play()) {
+              $currentSong.html(playButtonTemplate);
+              $('.main-controls .play-pause').html(playerBarPlayButton);
+              currentSoundFile.pause();
+          }
+    }
  };
 
  var nextSong = function() {
