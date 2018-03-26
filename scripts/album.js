@@ -17,10 +17,12 @@ var setSong = function(songNumber) {
  };
 
  var seek = function(time) {
-      if (currentSoundFile) {
-          currentSoundFile.setTime(time);
-      }
-  }
+   console.log("Seek!");
+   console.log(time);
+   if (currentSoundFile) {
+     currentSoundFile.setTime(time);
+   }
+ };
 
  var setVolume = function(volume) {
     if (currentSoundFile) {
@@ -126,25 +128,24 @@ var getSongNumberCell = function(number) {
        }
 }
 
+
+
 var filterTimeCode = function(timeInSeconds) {
-  //1. string -> number
-  var parsedSeconds = parseFloat(timeInSeconds);
-  //2. get number of minutes
-  var getMinutes = Math.floor(parsedSeconds / 60);
-  //3. get number of seconds
-  var getSeconds = Math.floor(parsedSeconds % 60);
-  //4. set conditional operator to display time in format "x:xx"
-  var displaySeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
-  return getMinutes + ":" + displaySeconds;
+      //1. string -> number
+      var parsedSeconds = parseFloat(timeInSeconds);
+      //2. get number of minutes
+      var getMinutes = Math.floor(parsedSeconds / 60);
+      //3. get number of seconds
+      var getSeconds = Math.floor(parsedSeconds % 60);
+      //4. set conditional operator to display time in format "x:xx"
+      var displaySeconds = getSeconds < 10 ? "0" + getSeconds : getSeconds;
+      return getMinutes + ":" + displaySeconds;
 
-  setTotalTimeInPlayerBar();
-
-}
+};
 
 var setTotalTimeInPlayerBar = function(totalTime) {
   $('.total-time').text(filterTimeCode(totalTime));
 }
-
 
 var setCurrentTimeInPlayerBar = function(currentTime) {
     $('.current-time').text(filterTimeCode(currentTime));
@@ -186,11 +187,13 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
           var barWidth = $(this).width();
           var seekBarFillRatio = offsetX / barWidth;
 
-          if ($(this).parent().attr('class') == 'seek-control') {
-                      seek(seekBarFillRatio * currentSoundFile.getDuration());
-          } else {
-               setVolume(seekBarFillRatio * 100);
-          }
+          if (currentSoundFile !== null) {
+              if ($(this).parent().attr('class') == 'seek-control') {
+                            seek(seekBarFillRatio * currentSoundFile.getDuration());
+                } else {
+                     setVolume(seekBarFillRatio * 100);
+              }
+        }
 
           updateSeekPercentage($(this), seekBarFillRatio);
       });
