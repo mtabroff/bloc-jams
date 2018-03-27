@@ -167,6 +167,8 @@ var updateSeekBarWhileSongPlays = function() {
 
  };
 
+
+
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
    var offsetXPercent = seekBarFillRatio * 100;
   // #1
@@ -300,7 +302,8 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
      $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
      $('.main-controls .play-pause').html(playerBarPauseButton);
 
-     setTotalTimeInPlayerBar();
+     setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
+     updateSeekBarWhileSongPlays();
  };
 
 
